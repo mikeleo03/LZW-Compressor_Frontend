@@ -66,9 +66,9 @@ const DecompressionForm = () => {
                     </div>
                     <div className="h-2/6 flex flex-col">
                         <h3 className='text-lg py-1.5 font-semibold text-primaryBlue'>Result</h3>
-                        <div className="overflow-y-auto bg-secondaryYellow outline-none border focus:border-indigo-600 shadow-sm rounded-lg mt-1 px-4 py-2">
+                        <div className="overflow-y-auto">
                             {result ? 
-                                (<>{result}</>) 
+                                (<div className="bg-secondaryYellow outline-none border focus:border-indigo-600 shadow-sm rounded-lg mt-1 px-4 py-2">{result}</div>) 
                                 : (<p>You haven't decompress any plain text.</p>)}
                         </div>
                     </div>
