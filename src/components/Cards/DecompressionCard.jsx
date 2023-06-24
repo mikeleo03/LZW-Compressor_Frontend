@@ -2,7 +2,7 @@ import React from 'react'
 
 const DecompressionCard = ({ date, time, text, decompressed }) => {
     return (
-        <div className='w-full rounded-xl bg-redCard flex flex-col p-3.5 pl-5 text-white'>
+        <div className='w-full rounded-xl bg-redCard flex flex-col p-3.5 pl-5 text-white mb-4'>
             <div className='py-1 flex flex-row'>
                 <div className='w-1/2'>
                     <h3 className='text-sm font-bold'>{date}</h3>

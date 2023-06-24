@@ -14,7 +14,7 @@ const backgroundStyle = {
 }
 
 // const url = process.env.REACT_APP_BACKEND_URL_DEV;
-const url = "https://localhost:8080"
+const url = "http://localhost:8080"
 
 function App() {
   const [activeTab, setActiveTab] = useState("Compression");
@@ -23,7 +23,7 @@ function App() {
 
   // Fetch data process, update list fakultas every data is sent
   useEffect(() => {
-      fetch(url + "/api/comphist", {
+      fetch(url + "/api/history/compress", {
           method: "GET",
           headers: {
               "Content-type": "application/json; charset=UTF-8"
@@ -33,12 +33,12 @@ function App() {
           .then((data) => {
               // Update state
               console.log(data);
-              setCompHist(data);
+              setCompHist(data.data);
           });
   }, [compHist]);
 
   useEffect(() => {
-      fetch(url + "/api/decomphist", {
+      fetch(url + "/api/history/decompress", {
           method: "GET",
           headers: {
               "Content-type": "application/json; charset=UTF-8"
@@ -48,7 +48,7 @@ function App() {
           .then((data) => {
               // Update state
               console.log(data);
-              setDecompHist(data);
+              setDecompHist(data.data);
           });
   }, [decompHist]);
 
@@ -84,7 +84,7 @@ function App() {
                       <div className='h-1/12'>
                           <h1 className='text-xl font-bold'>Compression History</h1>
                       </div>
-                      <div className='overflow-y-auto h-11/12 mb-10'>
+                      <div className='overflow-y-auto h-11/12'>
                         {compHist[0] ? (
                           compHist.map((obj) => (
                             <CompressionCard 
@@ -113,7 +113,7 @@ function App() {
                       <div className='h-1/12'>
                           <h1 className='text-xl font-bold'>Decompression History</h1>
                       </div>
-                      <div className='overflow-y-auto h-11/12 mb-10'>
+                      <div className='overflow-y-auto h-11/12'>
                         {decompHist[0] ? (
                           decompHist.map((obj) => (
                             <DecompressionCard 

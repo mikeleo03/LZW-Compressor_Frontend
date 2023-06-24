@@ -12,7 +12,6 @@ const CompressionForm = () => {
     const handleSubmitForms = async (event) => {
         event.preventDefault();
 
-        // 1. Request and gather response
         try {
             const response = await fetch(url + "/api/compress/answer?" + new URLSearchParams({
                 text: text
@@ -37,38 +36,7 @@ const CompressionForm = () => {
         } catch (err) {
             console.error("Error request result: ", err);
             setSendFailed(true);
-        }  
-
-        // 2. Post to history DB
-        /* var today = new Date();
-        var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-        var time = today.getHours() + "." + today.getMinutes();
-        console.log("Tambah history compression:", text);
-        try {
-            fetch(url + "/api/compressDb", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    "text": text,
-                    "date": date,
-                    "time": time,
-                    "compressed": result
-                }),
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                // Update state
-                console.log("Add history successful:", data);
-                setText("");
-            });
-            console.log("send failed:", sendFailed)
-
-        } catch (error) {
-            console.error("Error add history: ", error);
-            setSendFailed(true)
-        } */
+        }
     };
 
     return (
@@ -98,7 +66,7 @@ const CompressionForm = () => {
                     </div>
                     <div className="h-2/6 flex flex-col">
                         <h3 className='text-lg py-1.5 font-semibold text-primaryBlue'>Result</h3>
-                        <div className="overflow-y-auto">
+                        <div className="overflow-y-auto bg-secondaryYellow outline-none border focus:border-indigo-600 shadow-sm rounded-lg mt-1 px-4 py-2">
                             {result ? 
                                 (<>{result}</>) 
                                 : (<p>You haven't compress any plain text.</p>)}
