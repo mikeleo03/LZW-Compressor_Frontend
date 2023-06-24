@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { createTypeReferenceDirectiveResolutionCache } from "typescript";
 
 // const url = process.env.REACT_APP_BACKEND_URL_DEV;
-const url = "https://localhost:8080"
+const url = "http://localhost:8080"
 
 // Compression Forms Component
 const CompressionForm = () => {
@@ -14,26 +13,34 @@ const CompressionForm = () => {
         event.preventDefault();
 
         // 1. Request and gather response
-        const response = await fetch(url + "api/compress", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                text: text,
-            }),
-        })
-        .then(async (res) => res.json())
-        .then((data) => {
-            // Ganther result
-            console.log("res:", response)
-            console.log("Result:", data);
-            setResult(data);
-        })
-        .catch((err) => {console.error("Error request result: ", err); setSendFailed(true)})
+        try {
+            const response = await fetch(url + "/api/compress/answer?" + new URLSearchParams({
+                text: text
+            }), {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                }
+            });
+        
+            if (!response.ok) {
+                throw new Error("Request failed with status: " + response.status);
+            }
+        
+            const data = await response.json();
+        
+            // Gather result
+            console.log("res:", response);
+            console.log("Result:", data.data);
+            setResult(data.data);
+
+        } catch (err) {
+            console.error("Error request result: ", err);
+            setSendFailed(true);
+        }  
 
         // 2. Post to history DB
-        var today = new Date();
+        /* var today = new Date();
         var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
         var time = today.getHours() + "." + today.getMinutes();
         console.log("Tambah history compression:", text);
@@ -61,23 +68,24 @@ const CompressionForm = () => {
         } catch (error) {
             console.error("Error add history: ", error);
             setSendFailed(true)
-        }
+        } */
     };
 
     return (
-        <main className="py-1 mt-2">
-            <div className="max-w-screen-xl mx-auto px-0 text-gray-600">
-                <div className="mx-auto flex flex-col">
-                    <div className="space-y-3 mb-6">
+        <main className="h-full">
+            <div className="h-full mx-auto px-0 text-gray-600">
+                <div className="h-full mx-auto flex flex-col space-y-5">
+                    <div className="h-3/6 space-y-3">
                         <div>
                             <label className="font-medium">
                                 Plain Text
                             </label>
                             <textarea 
                                 required 
-                                className="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                                className="w-full mt-2 h-36 px-4 py-2 resize-none appearance-none bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                                 value={text}
                                 onChange={(e) => setText(e.target.value)}
+                                placeholder="Insert plain text like Hello World"
                             >
                             </textarea>
                         </div>
@@ -88,11 +96,11 @@ const CompressionForm = () => {
                             Compress
                         </button>
                     </div>
-                    <div className="flex-1">
+                    <div className="h-2/6 flex flex-col">
                         <h3 className='text-lg py-1.5 font-semibold text-primaryBlue'>Result</h3>
-                        <div>
+                        <div className="overflow-y-auto">
                             {result ? 
-                                (<p>{result}</p>) 
+                                (<>{result}</>) 
                                 : (<p>You haven't compress any plain text.</p>)}
                         </div>
                     </div>

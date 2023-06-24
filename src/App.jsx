@@ -76,7 +76,7 @@ function App() {
                         <h1 className='text-3xl font-bold'>Compression</h1>
                         <h3 className='text-lg py-1.5 font-semibold text-primaryBlue'>Please input the text to be commpressed</h3>
                     </div>
-                    <div className='h-5/6 mb-10'>
+                    <div className='h-5/6'>
                       <CompressionForm />
                     </div>
                   </div>
@@ -105,7 +105,7 @@ function App() {
                         <h1 className='text-3xl font-bold'>Decompression</h1>
                         <h3 className='text-lg py-1.5 font-semibold text-primaryBlue'>Please input the text to be decommpressed</h3>
                     </div>
-                    <div className='h-5/6 mb-10'>
+                    <div className='h-5/6'>
                       <DecompressionForm />
                     </div>
                   </div>
