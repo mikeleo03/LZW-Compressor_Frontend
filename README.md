@@ -1,4 +1,4 @@
-# LZW Compressor
+# 🧩 LZW Compressor
 > Frontend side of TextFile compression using LZW Algorithm with MERN techstack
 
 ## General Information
