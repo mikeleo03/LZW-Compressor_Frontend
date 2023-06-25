@@ -11,13 +11,13 @@ const CompressionCard = ({ date, time, text, compressed }) => {
                     <h3 className='text-sm font-bold'>{time}</h3>
                 </div>
             </div>
-            <div className='py-1'>
+            <div className='py-1 w-full'>
                 <p className='font-bold text-base'>Plain Text</p>
-                <p className='font-medium text-sm'>{text}</p>
+                <p className='font-medium text-sm overflow-auto w-full'>{text}</p>
             </div>
-            <div className='py-1'>
+            <div className='py-1 w-full'>
                 <p className='font-bold text-base'>Compressed Text</p>
-                <p className='font-medium text-sm'>{compressed}</p>
+                <p className='font-medium text-sm overflow-auto w-full'>{compressed}</p>
             </div>
         </div>
     )
