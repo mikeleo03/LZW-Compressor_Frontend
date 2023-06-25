@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-// const url = process.env.REACT_APP_BACKEND_URL_DEV;
-const url = "http://localhost:8080"
+const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
 // Decompression Forms Component
 const DecompressionForm = () => {
@@ -29,8 +28,6 @@ const DecompressionForm = () => {
             const data = await response.json();
         
             // Gather result
-            console.log("res:", response);
-            console.log("Result:", data.data);
             setResult(data.data);
 
         } catch (err) {

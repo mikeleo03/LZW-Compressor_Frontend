@@ -13,8 +13,7 @@ const backgroundStyle = {
   maxHeight: "100vh",
 }
 
-// const url = process.env.REACT_APP_BACKEND_URL_DEV;
-const url = "http://localhost:8080"
+const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
 function App() {
   const [activeTab, setActiveTab] = useState("Compression");
@@ -32,7 +31,6 @@ function App() {
           .then((res) => res.json())
           .then((data) => {
               // Update state
-              console.log(data);
               setCompHist(data.data);
           });
   }, [compHist]);
@@ -47,7 +45,6 @@ function App() {
           .then((res) => res.json())
           .then((data) => {
               // Update state
-              console.log(data);
               setDecompHist(data.data);
           });
   }, [decompHist]);
@@ -86,8 +83,9 @@ function App() {
                       </div>
                       <div className='overflow-y-auto h-11/12'>
                         {compHist[0] ? (
-                          compHist.map((obj) => (
+                          compHist.map((obj, index) => (
                             <CompressionCard 
+                              key={index}
                               time={obj.time}
                               date={obj.date}
                               text={obj.text}
@@ -115,8 +113,9 @@ function App() {
                       </div>
                       <div className='overflow-y-auto h-11/12'>
                         {decompHist[0] ? (
-                          decompHist.map((obj) => (
+                          decompHist.map((obj, index) => (
                             <DecompressionCard 
+                              key={index}  
                               time={obj.time}
                               date={obj.date}
                               text={obj.text}
