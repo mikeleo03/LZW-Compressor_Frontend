@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CompressionCard = ({ date, time, text, compressed, enhanced }) => {
+const CompressionCard = ({ date, time, text, compressed, enhanced, ratio }) => {
     return (
         <div className='w-full rounded-xl bg-redCard flex flex-col p-3.5 pl-5 text-white mb-4'>
             <div className='py-1 flex flex-row'>
@@ -18,6 +18,9 @@ const CompressionCard = ({ date, time, text, compressed, enhanced }) => {
             <div className='py-1 w-full'>
                 <p className='font-bold text-base'>Compressed Text {enhanced}</p>
                 <p className='font-medium text-sm overflow-auto w-full'>{compressed}</p>
+            </div>
+            <div className='py-1 w-full'>
+                <p className='text-base font-bold'>Compression Rate &nbsp;{ratio} %</p>
             </div>
         </div>
     )

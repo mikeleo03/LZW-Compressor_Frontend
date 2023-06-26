@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const url = import.meta.env.VITE_REACT_APP_BACKEND_URL_DEV;
+const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
 // Compression Forms Component
 const CompressionForm = () => {
@@ -58,7 +58,7 @@ const CompressionForm = () => {
                             <label className="font-medium">
                                 Algorithm Enhance
                             </label>
-                            <div className="flex flex-col mt-1.5 grid grid-cols-2 space-x-2 rounded-lg bg-secondaryYellow p-2">
+                            <div className="flex flex-col mt-1.5 grid grid-cols-2 space-x-2 rounded-lg bg-secondaryYellow p-1.5">
                                 <div>
                                     <input type="radio" id="basiccomp" name="basiccomp" value="Basic LZW" checked={enhancecomp === false} onChange={() => setEnhancecomp(false)} className="peer hidden"></input>
                                     <label htmlFor="basiccomp" className="text-sm block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-primaryBlue font-bold peer-checked:text-white h-full flex justify-center items-center">Basic LZW</label>
@@ -77,10 +77,17 @@ const CompressionForm = () => {
                         </button>
                     </div>
                     <div className="h-2/6 flex flex-col">
-                        <h3 className='text-lg py-1.5 font-semibold text-primaryBlue'>Result</h3>
+                        <div className="flex flex-row">
+                            <div className="w-1/2">
+                                <h3 className='text-lg py-1.5 font-semibold text-primaryBlue'>Result</h3>
+                            </div>
+                            <div className="w-1/2 flex items-center">
+                                <span className='text-lg py-auto font-semibold text-primaryBlue'>Compression Rate : </span>&nbsp;{result[1] ? result[1].toFixed(2) : '-'} %
+                            </div>
+                        </div>
                         <div className="overflow-y-auto">
-                            {result ? 
-                                (<div className="bg-secondaryYellow outline-none border focus:border-indigo-600 shadow-sm rounded-lg mt-1 px-4 py-2">{result}</div>) 
+                            {result[0] ? 
+                                (<div className="bg-primaryGray outline-none border focus:border-indigo-600 shadow-sm rounded-lg mt-1 px-4 py-2">{result[0]}</div>) 
                                 : (<p>You haven't compress any plain text.</p>)}
                         </div>
                     </div>

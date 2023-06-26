@@ -13,7 +13,7 @@ const backgroundStyle = {
   maxHeight: "100vh",
 }
 
-const url = import.meta.env.VITE_REACT_APP_BACKEND_URL_DEV;
+const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
 function App() {
   const [activeTab, setActiveTab] = useState("Compression");
@@ -91,6 +91,7 @@ function App() {
                               text={obj.text}
                               compressed={obj.compressed}
                               enhanced={obj.enhanced}
+                              ratio={obj.remained.toFixed(2)}
                             />
                           ))
                         ) : (
@@ -121,6 +122,8 @@ function App() {
                               date={obj.date}
                               text={obj.text}
                               decompressed={obj.decompressed}
+                              enhanced={obj.enhanced}
+                              ratio={obj.remained.toFixed(2)}
                             />
                           ))
                         ) : (
